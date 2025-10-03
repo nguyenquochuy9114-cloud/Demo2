@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crypto Analyzer</title>
+</head>
+<body style="background:#111;color:white;font-family:sans-serif;">
+    <h1>Crypto Analyzer</h1>
+
+    <form method="post">
+        <label>Chọn coin:</label>
+        <select name="coin" onchange="this.form.submit()">
+            {% for coin in coins %}
+                <option value="{{ coin.id }}" {% if coin.id == selected %}selected{% endif %}>
+                    {{ coin.market_cap_rank }}. {{ coin.name }} ({{ coin.symbol.upper() }})
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+
+    <h2>{{ selected.upper() }}</h2>
+    <p><strong>Time:</strong> {{ data.time }}</p>
+    <p><strong>Price:</strong> {{ data.price }}</p>
+    <p><strong>Market Cap:</strong> {{ data.market_cap }}</p>
+    <p><strong>Volume % Market Cap:</strong> {{ data.volume_percent }}</p>
+    <p><strong>Volume 7/30 Ratio:</strong> {{ data.vol_ratio }}</p>
+    <p><strong>Signal:</strong> {{ data.signal }}</p>
+
+    <div>{{ chart|safe }}</div>
+</body>
+</html>
